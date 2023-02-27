@@ -1,0 +1,53 @@
+
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Погодное приложение</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+<div class="d-flex flex-column flex-md-row align-items-center pb-3 mb-4 border-bottom">
+      <a href="/" class="d-flex align-items-center text-dark text-decoration-none">
+
+        <span class="fs-4">Приложение о погоде</span>
+      </a>
+      <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
+        <a class="me-3 py-2 text-dark text-decoration-none" href="#">Главная страница</a>
+        <a class="me-3 py-2 text-dark text-decoration-none" href="#">Информация</a>
+      </nav>
+    </div>
+    <div class="container mt5">
+        <div class="row">
+            <div class="col-5 offset-1">
+                <form action="" method="post">
+                    {%csrf_token%}
+                    <label for="city">Город</label>
+                    {{form.name}}
+                    <input type="submit" name="send" value="Узнать" class="mt-2 btn btn-danger">
+                </form>
+            </div>
+
+            <div class="alert alert-danger">
+                <div class="col-4 offset-1">
+                    <h1>Информация</h1>
+                    {% for info in all_info %}
+                    <div class="alert alert-danger">
+                        <b>Город:</b>{{info.city}}<br>
+                        <b>Температура:</b>{{info.temp}}<sup>0</sup><br>
+                        <b>Описание погоды:</b>{{info.description}}<br>
+                        <span data-v-3208ab85="" class="symbol">Влажность:</span>{{info.humidity}}%
+                        <figure class="image is-50x50">
+                            <img src="http://openweathermap.org/img/w/{{info.icon}}.png" alt="Image">
+                        </figure>
+                    </div>
+                </div>
+            </div>
+          {% endfor %}
+         </div>
+       </div>
+     </body>
+  </html>
